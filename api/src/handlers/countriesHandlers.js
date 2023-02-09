@@ -1,31 +1,102 @@
-const {getCountryById} = require('../controllers/countryController')
+const { fullDataBase } = require('../controllers/dataBaseController');
+const { Country, Activities } = require('../db');
 
+const searchOptions = {
+    include: {
+        model: Activities,
+        through: {
+            attributes: [],
+        },
+    },
+};
 
+const findCountry = async (id) => {
+    return await Country.findByPk(id, searchOptions);
+};
+const handleError = (res, err) => {
+    return res.status(500).json({ error: `Ocurrió un error: ${err.message}` });
+};
 
-const getAllCountriesHandler = (req, res) => {
-    // 0) tengo traer la data de all countries  en el DB handler, hacer un 
-    // bulkcreate y luego, guardarla en el DBhandler.
-    // 1) una vez con los countries guardados en la data base, debo mostrarlos
-    // con la data necesaria en la ruta principal.
-    // 2) ojo porque desde este handler debo tmb, ver el tema del query.
+const getAllCountriesHandler = async (req, res) => {
+    fullDataBase();
     const { name } = req.query;
-    if (name) res.status(200).send(`estoy pasando los paises con nombre ${name}`)
-    else res.send('Si no aparece el country, Envío todos los countries de la DB y mando un mensaje por alert/throw respecto de que no existe tal country')
+    const allCountries = await Country.findAll(searchOptions);
+    try {
+        if (name) {
+            const country = allCountries.filter(c => c.name.toLowerCase().includes(name.toLowerCase()));
+            if (country.length) {
+                return res.status(200).json(country);
+            }
+            return res.status(400).json("No country found");
+        }
+        return res.status(200).json(allCountries);
+    } catch (err) {
+        return handleError(res, err);
+    }
 };
 
 const getCountryHandler = async (req, res) => {
-    // 1) debo obtener el detalle del país en particular.
-    // 2) incluyendo los parametros pedidos.
-    // 3) 
-    const { id } = req.params;
     try {
-        const country = await getCountryById(id);
-        res.status(200).json(country);
-
-    } catch (error) {
-        res.status(400).json({error: error.message})
+        const { id } = req.params;
+        const countryId = await findCountry(id);
+        if (countryId) {
+            return res.status(200).json(countryId);
+        }
+        return res.status(400).json(`No country found with such ID: ${id}`);
+    } catch (err) {
+        return handleError(res, err);
     }
 };
+
+module.exports = {
+    getAllCountriesHandler,
+    getCountryHandler,
+};
+/* const getAllCountriesHandler = async (req, res) => {
+    const { name } = req.query;
+    fullDataBase() //llamo a la api para llenar mi DB de datos.
+    const allCountries = await Country.findAll({ //busco todos los countries, agrgeandole el model Activities
+
+        include: {
+            model: Activities, 
+            through: {
+                attributes: [],
+            },
+        },
+    });
+    try { 
+        if (name) {
+            const country = allCountries.filter(c => c.name.toLowerCase().includes(name.toLowerCase())); //hago el filter de los countries que posean la data dada por query.
+            if (country.length) { //si existe un country como tal, lo muestro
+                return res.status(200).json(country); 
+            }
+            return res.status(400).json("Not existing country"); //sino arrojo un status 400 diciendo que no existe un Country con el query dado.
+        }
+        return res.status(200).json(allCountries); //si no hay name en query, devuelvo toda la DB
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const getCountryHandler = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const countryId = await Country.findByPk(id, {
+            include: {
+                model: Activities,
+                through: {
+                    attributes: [],
+                },
+            },
+        });
+        if (countryId) {
+            return res.status(200).json(countryId);
+        }
+        return res.status(400).json(`Not country available with such ID: ${id}`);
+    } catch (err) {
+        console.log(err);
+    }
+};*/
 
 module.exports = {
     getAllCountriesHandler,

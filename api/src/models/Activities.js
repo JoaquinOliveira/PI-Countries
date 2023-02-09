@@ -11,7 +11,7 @@ Temporada (Verano, Otoño, Invierno o Primavera)
  */
 module.exports = (sequelize) => {
     // defino el modelo
-    sequelize.define('Activity', {
+    sequelize.define('activities', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
                 notNull: {
                     msg: 'Please enter the name for the Activity to create' //mando mensaje para que ponga el nombre de la actividad.
                 }
-            }
+            } 
         },
         difficulty: {
             type: DataTypes.INTEGER,

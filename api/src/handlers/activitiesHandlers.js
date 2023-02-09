@@ -1,12 +1,12 @@
 const { createActivity } = require('../controllers/activityController')
-
+const { Activities, Country } = require('../db')
 
 const activitiesHandlers = async (req, res) => {
     //el readme pide cree una actividad con varios datos, que al ser un form,
     // vendran por un body.
     try {
-        const { name, difficult, duration, season, countryId } = req.body;
-        const newActivity = await createActivity({name, difficult, duration, season, countryId});
+        const { name, difficulty, duration, season, countryId } = req.body;
+        const newActivity = await createActivity(name, difficulty, duration, season, countryId);
         res.status(201).json(newActivity);
     }
     catch(error) {
@@ -14,3 +14,5 @@ const activitiesHandlers = async (req, res) => {
     }
 }
     module.exports = { activitiesHandlers }
+
+    
