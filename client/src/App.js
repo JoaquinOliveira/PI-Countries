@@ -1,22 +1,21 @@
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Landing } from '../Landing/Landing';
-import Home from '../Landing/Landing'
+import Landing from '../src/Views/Landing/Landing';
+import Home from '../src/Views/Home/Home'
+import { BrowserRouter as Router, Switch, Route,  } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Route exact path='/'>
-          <Landing />
-        </Route>
-
-        <Route path='/home'>
-          <Home />
-        </Route>
-      </div>
-    </BrowserRouter>
-  );
-}
+    <Router>
+    <div className="App">
+    <Switch>
+      <Route exact path= "/" component= { Landing} />
+      <Route exact path = "/home" component= { Home } />
+      {/* <Route path="/home/:id" component= { Detail } />
+      <Route path="/activity" component= { ActivityForm } /> */}
+    
+    </Switch>
+    </div>
+</Router>
+)}
 
 export default App;

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { getAllCountriesHandler, getCountryHandler} = require('../handlers/countriesHandlers');
-const { fullDataBase } = require('../controllers/dataBaseController');
+
 
 const countriesRouter = Router();
 

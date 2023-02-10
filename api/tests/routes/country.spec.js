@@ -9,7 +9,8 @@ const country = {
   id: 'ARG',
   name: 'Argentina',
   flag: 'missing flag',
-  continent: 'SouthAmerica'
+  continent: 'SouthAmerica',
+  capital: 'Buwnos Aires'
 };
 
 describe('Country routes', () => {

@@ -29,7 +29,6 @@ const fullDataBase = async () => {
     } catch (error) {
         throw new Error(error.message)
     }
-
 };
 
 

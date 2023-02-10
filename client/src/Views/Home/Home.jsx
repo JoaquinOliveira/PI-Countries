@@ -1,4 +1,4 @@
-import CardsContainer from "../../../components/CardsContainer/CardsContainer";
+import CardsContainer from '../../components/CardsContainer/CardsContainer'
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';

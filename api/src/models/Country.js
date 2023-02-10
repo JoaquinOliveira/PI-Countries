@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
         },
         capital:{
           type: DataTypes.STRING,
- 
+          allowNull: false
         },
         subregion: {
           type: DataTypes.STRING,
