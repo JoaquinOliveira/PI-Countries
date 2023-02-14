@@ -16,7 +16,7 @@ const fullDataBase = async () => {
             name: country.name.common,
             flag: country.flags[0],
             capital: country.capital ? country.capital[0] : "This country have no capital", //me volviste loco! CAPITAL... como va haber un NULL?
-            continent: country.region,
+            continents: country.continents[0],
             subregion: country.subregion,
             area: country.area || null,
             population: country.population || null
@@ -27,7 +27,7 @@ const fullDataBase = async () => {
         return apiInformation; //retorno mi base de datos
 
     } catch (error) {
-        throw new Error(error.message)
+        return error
     }
 };
 

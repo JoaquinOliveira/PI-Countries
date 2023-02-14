@@ -17,4 +17,5 @@ const createActivity = async (name, difficulty, duration, season, countryId) => 
 
     return newActivity; //devuelvo el objeto creado.
 }
+
 module.exports = { createActivity }

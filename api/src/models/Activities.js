@@ -20,12 +20,12 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING(15), //cuido mi base de datos de que no pueda poner más de 15 caracteres.
             allowNull: false,
-            validate: {
+            /* validate: {
                 isAlpha: true, //debe ser sí o sí letras.
                 notNull: {
                     msg: 'Please enter the name for the Activity to create' //mando mensaje para que ponga el nombre de la actividad.
-                }
-            } 
+                } */
+            
         },
         difficulty: {
             type: DataTypes.INTEGER,
@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
         season: {
             type: DataTypes.ENUM('summer', 'fall', 'winter', 'spring'),
             allowNull: false,
-            equals: 'specific value' // ojo que en el FORM voy a tener que mande todo a minúscula
+     
         },
     },
     {timestamps:false} //para sacar el createdAt y updateAt de la tabla.

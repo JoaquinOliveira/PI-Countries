@@ -14,21 +14,20 @@ const activitiesHandlers = async (req, res) => {
         res.status(201).json(newActivity); //si puedo crearla, la devuelvo con el statos.
     }
     catch (error) {
-        res.status(400).json(handleError(res, error)); //sino manejo el error.
+        (handleError(res, error)); //sino manejo el error.
     }
 }
 
 //agrego un get activities
-
-const getActivitiesHandler = async (req, res) => {
+const getAllActivities = async (req, res) => {
     const allActivities = await Activities.findAll();
     try {
-        res.status(200).json(allActivities);
-
+        return res.status(200).json(allActivities)
     } catch (error) {
-        res.status(400).json(handleError(res, error));
-    }
+        (handleError(res, error));
 }
+}
+
 //agrego un deleteActivities.
 
 const deleteActivities = async (req, res) => {
@@ -39,9 +38,9 @@ const deleteActivities = async (req, res) => {
         });
         res.status(200).json('Activity deleted')
     } catch (error) {
-        res.status(400).json(handleError(res, error));
+        (handleError(res, error));
     }
 }
 
-module.exports = { activitiesHandlers, deleteActivities, getActivitiesHandler }
+module.exports = { activitiesHandlers, deleteActivities, getAllActivities }
 

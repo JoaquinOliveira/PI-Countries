@@ -14,8 +14,8 @@ import {
 
 const initialState = {
     countries: [],
-    countriesDetail: [],
     allCountries: [],
+    countriesDetail: [],
     activities: [],
 }
 
@@ -43,7 +43,8 @@ const rootReducer = (state = initialState, action) => {
         case GET_ACTIVITIES:
             return {
                 ...state,
-                activities: action.payload
+                activities: action.payload,
+                allActivities: action.payload
             };
 
         case POST_ACTIVITIES:
@@ -58,85 +59,53 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case FILTERED_BY_ACTIVITIES:
-            const allCountries = state.allCountries;
-            const filteredByActivities = action.payload === 'All' ?
-                allCountries : allCountries.filter(c => {
+            const allCountries = state.allCountries
+            const filteredbyActivity = action.payload === 'All'
+            ? allCountries : allCountries.filter((c) => {
                     const activities = c.activities.map((a) => a.name)
                     return activities.includes(action.payload)
-                })
+
+                    });
             return {
                 ...state,
-                countries: filteredByActivities
+                countries: filteredbyActivity
             };
 
         case FILTERED_BY_CONTINENT:
-            state.countries = state.allCountries
-            const countriesByContinent = state.countries;
-            const filteredByContinent = action.payload === 'All' ?
-                countriesByContinent : countriesByContinent.Filter(c => c.continent === action.payload)
+            const countriesByContinent = state.allCountries
+            const filteredbyContinent = action.payload !== 'All' ?
+                countriesByContinent.filter(c => c.continents.includes(action.payload)) : countriesByContinent;
+            console.log(state.allCountries)
+            console.log(filteredbyContinent)
             return {
                 ...state,
-                countries: filteredByContinent
-            }
+                countries: filteredbyContinent
+            };
 
         case ORDERED_BY_NAME:
-            const countriesName = state.countries;
-            const countriesByName = countriesName.sort((a, b) => {
-                if (action.payload === 'asc') {
-                    if (a.name > b.name) {
-                        return 1;
-                    }
-                    else if (a.name < b.name) {
-                        return -1;
-                    }
-                    else return 0
-                }
-                else if (action.payload === 'des') {
-                    if (a.name > b.name) {
-                        return -1;
-                    }
-                    else if (a.name < b.name) {
-                        return 1;
-                    }
-                    else return 0
-                }
-                return 'Ordered'
-            });
-
+            const sorted = state.allCountries
+            const isAscending = action.payload === "asc";
+            const sortedCountries = sorted.sort((a, b) =>
+                isAscending ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
+            );
             return {
                 ...state,
-                countries: countriesByName
+                countries: sortedCountries
             }
 
         case ORDERED_BY_POPULATION:
-            const countriesPop = state.countries;
-            const countriesByPopulation = countriesPop.sort((a, b) => {
-                if (action.payload === 'asc') {
-                    if (a.population > b.population) {
-                        return 1;
-                    }
-                    else if (a.population < b.population) {
-                        return -1;
-                    }
-                    else return 0
-                }
-                else if (action.payload === 'des') {
-                    if (a.population > b.population) {
-                        return -1;
-                    }
-                    else if (a.population < b.population) {
-                        return 1;
-                    }
-                    else return 0
-                }
-                return 'Ordered'
+            const countriesPop = state.allCountries;
+            console.log(countriesPop)
+            const isAscending2 = action.payload === 'asc';
+            const sortedByPopulation = countriesPop.sort((a, b) => {
+                return isAscending2 ? b.population - a.population : a.population - b.population;
             });
 
             return {
                 ...state,
-                countries: countriesByPopulation
-            }
-            
+                countries: sortedByPopulation
+            };
+
         case CLEAN:
             return {
                 ...state,
@@ -144,8 +113,11 @@ const rootReducer = (state = initialState, action) => {
             };
 
         default:
-            return state
+            return { ...state }
 
+        //me falta el estado para: 
+        // 1) paginación
+        // 2) add y rmeove favorite?
 
 
 

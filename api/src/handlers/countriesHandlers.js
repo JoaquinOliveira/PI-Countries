@@ -33,7 +33,7 @@ const getAllCountriesHandler = async (req, res) => {
     } catch (error) {
         return handleError(res, error); //retorno el handler error "glboal"
     }
-};
+};/*  */
 
 const getCountryHandler = async (req, res) => {
     try {

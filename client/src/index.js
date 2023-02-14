@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -9,15 +9,16 @@ import store from './redux/store';
 import axios from 'axios';
 //  axios.defaults.baseURL = 'https://localhost:3001';
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:3001/';
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-
-ReactDOM.render(
+root.render(
   <Provider store={store}>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

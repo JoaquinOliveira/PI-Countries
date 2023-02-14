@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { activitiesHandlers } = require('../handlers/activitiesHandlers');
+const { activitiesHandlers, getAllActivities } = require('../handlers/activitiesHandlers');
 
 
 const activitiesRouter = Router();
@@ -11,7 +11,8 @@ const validate = (req, res, next) => {
     next()
 }
 
-activitiesRouter.post('/', validate, activitiesHandlers)
+activitiesRouter.post('/', validate, activitiesHandlers);
+activitiesRouter.get('/', getAllActivities)
 
 
-module.exports = activitiesRouter;
+module.exports = activitiesRouter

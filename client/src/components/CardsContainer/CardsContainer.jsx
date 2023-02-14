@@ -1,19 +1,18 @@
 import Card from '../Card/Card';
 import style from './CardsContainer.module.css';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 //renderiza el component card 
 // con la data que necesito
-const CardsContainer = () => {
-    const countries = useSelector(state => state.countries)
+const CardsContainer = ({currentCountry}) => {
 
     return (
         <div className={style.container}>
-            {countries.map(c => <Card
-                id={c.id}
+            {currentCountry.map(c => <Link to={"/home/" + c.id} className="linkCard"><Card
                 name={c.name}
                 flag={c.flag}
-                continent={c.continent}
-            />)}
+                continents={c.continents}
+                id={c.id} /> </Link>)}
         </div>
     )
 }

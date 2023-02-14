@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { 
-    GET_COUNTRIES_BY_ID, 
-    GET_COUNTRIES, 
-    GET_COUNTRIES_BY_NAME, 
+import {
+    GET_COUNTRIES_BY_ID,
+    GET_COUNTRIES,
+    GET_COUNTRIES_BY_NAME,
     GET_ACTIVITIES,
     POST_ACTIVITIES,
-    DELETE_ACTIVITY, 
-    FILTERED_BY_ACTIVITIES, 
-    FILTERED_BY_CONTINENT, 
-    ORDERED_BY_NAME, 
-    ORDERED_BY_POPULATION, 
+    DELETE_ACTIVITY,
+    FILTERED_BY_ACTIVITIES,
+    FILTERED_BY_CONTINENT,
+    ORDERED_BY_NAME,
+    ORDERED_BY_POPULATION,
     CLEAN,
- } from './types';
+} from './types';
 
 
 export const getAllCountries = () => {
@@ -24,52 +24,63 @@ export const getAllCountries = () => {
 
 export const getCountriesByName = (name) => {
     return async function (dispatch) {
-        const apiData = await axios.get(`https://localhost:3001/countries?name=${name}`)
+        const apiData = await axios.get(`http://localhost:3001/countries?name=${name}`)
         const countryByName = apiData.data
         dispatch({ type: GET_COUNTRIES_BY_NAME, payload: countryByName });
     };
 }
+
+
 export const getCountriesById = (id) => {
     return async function (dispatch) {
-        const apiData = await axios.get(`https://localhost:3001/countries/${id}`)
+        const apiData = await axios.get(`http://localhost:3001/countries/${id}`)
         const countryById = apiData.data
         dispatch({ type: GET_COUNTRIES_BY_ID, payload: countryById });
     };
 }
 
-
-export const orderByPopulation = (dispatch) => {
-    dispatch({ type: ORDERED_BY_POPULATION })
-}
-export const orderByName = (dispatch) => {
-    dispatch({ type: ORDERED_BY_NAME })
-}
-export const filterByContinent = (dispatch) => {
-    dispatch({ type: FILTERED_BY_CONTINENT })
+export const orderByPopulation = (order) => {
+    console.log(order)
+    return { type: ORDERED_BY_POPULATION, payload: order }
 }
 
-export const filterByActivities = (dispatch) => {
-    dispatch({ type: FILTERED_BY_ACTIVITIES })
+export const orderByName = (order) => {
+    return { type: ORDERED_BY_NAME, payload: order }
+}
+
+export const filterByContinent = (payload) => {
+    console.log('filterByContinent', payload);
+    return { type: FILTERED_BY_CONTINENT, payload: payload }
+}
+
+export const filterByActivities = (activities) => {
+    console.log(activities)
+    return { type: FILTERED_BY_ACTIVITIES, payload: activities }
 }
 
 //la agrego para tener alguna más
-export const getAllActivities = (id) => {
+export const getAllActivities = () => {
     return async function (dispatch) {
-        const apiData = await axios.get(`http://localhost:3001/activities/${id}`)
-        const activityById = apiData.data
-        dispatch({ type: GET_ACTIVITIES, payload: activityById });
+        const apiData = await axios.get('http://localhost:3001/activities')
+        const allActivities = apiData.data
+        dispatch({ type: GET_ACTIVITIES, payload: allActivities });
     };
 }
 
 export function postActivity(payload) {
     return async function () {
-        const apiData = await axios.post("http://localhost:3001/activities", payload);
-        return{
-            type: POST_ACTIVITIES,
-            payload: apiData,
-        };
+        try {
+            const apiData = await axios.post("http://localhost:3001/activities", payload);
+            return {
+                type: POST_ACTIVITIES,
+                payload: apiData,
+            };
+        } catch (error) {
+            console.error(error);
+            throw new Error("Could not create activity");
+        }
     };
-};
+}
 
 export function deleteActivity(id) {
     return async function (dispatch) {
@@ -90,3 +101,24 @@ export function Clean() {
         type: CLEAN,
     };
 }
+
+
+/* export let postUser = (data)=>{
+    return async function(dispatch){
+        fetch("http://localhost:3001/api/users", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'cors'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("sending the sign up from to the api...");
+                return dispatch({
+                    type: POST_USER,
+                    payload: data
+                })
+            })
+            .catch(err=>err) */
+
+// ojo es para creación de usuarios para login.
