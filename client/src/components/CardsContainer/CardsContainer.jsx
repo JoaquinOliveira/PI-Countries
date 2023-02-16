@@ -1,6 +1,5 @@
 import Card from '../Card/Card';
 import style from './CardsContainer.module.css';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 //renderiza el component card 
 // con la data que necesito

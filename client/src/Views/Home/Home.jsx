@@ -32,6 +32,21 @@ const Home = () => {
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
     const currentCountry = countries.slice(indexOfFirstCountry, indexOfLastCountry);
 
+    function nextHandler() {
+        const totalCountries = countries.length;
+        const nextPage = currentPage;
+        const firstIndex = nextPage * countriesPerPage; 
+        if (firstIndex >= totalCountries) return; //si el indice es = al total de poke, estoy en el ultimo poke y no puede haber next
+
+        setCurrentPage(currentPage + 1);
+    }
+
+    function prevHandler() {
+        const prevPage = currentPage - 1;
+        if (prevPage < 0) return;
+        setCurrentPage(prevPage);
+    }
+
     const handleOrderByName = (e) => {
         e.preventDefault();
         dispatch(orderByName(e.target.value));
@@ -104,9 +119,11 @@ const Home = () => {
             <Paginate paginated={paginated}
                 allCountries={countries.length}
                 countriesPerPage={countriesPerPage}
-                currentPage={currentPage} />
+                currentPage={currentPage}
+                nextHandler={nextHandler}
+                prevHandler={prevHandler} />
 
-             <CardsContainer currentCountry={currentCountry}
+            <CardsContainer currentCountry={currentCountry}
 
             />
 

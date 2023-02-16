@@ -14,7 +14,7 @@ const NavBar = () => {
         e.preventDefault();
         setName(e.target.value);
         console.log(name);
-        
+
     }
     const handleButtonChange = (e) => {
         e.preventDefault();
@@ -34,11 +34,10 @@ const NavBar = () => {
                 placeholder='Search...'
                 onChange={(e) => handleInputChange(e)}
             />
-            <button onClick= {(e) => handleButtonChange(e)} type='submit'>Search</button>
-         
+            <button onClick={(e) => handleButtonChange(e)} type='submit'>Search</button>
         </div>
     )
-} 
+}
 
 
 

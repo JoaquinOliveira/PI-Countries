@@ -2,7 +2,6 @@ import styles from './Form.module.css';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllCountries, postActivity } from '../../redux/actions';
 
@@ -12,6 +11,10 @@ export default function Form() {
     const countries = useSelector(state => state.countries)
     const countriesNames = countries.map(country => { return { label: country.name, value: country.id } })
     const navigate = useNavigate();
+    const activities = useSelector(state => state.activities);
+    console.log(activities)
+
+
 
     useEffect(() => {
         dispatch(getAllCountries());
@@ -62,11 +65,9 @@ export default function Form() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (input.name && input.difficulty && input.season && input.countryId.length) {
-            const activity = {
-                ...input,
-                countryId: input.countryId.join(''),
-            };
-            dispatch(postActivity(activity));
+
+
+            dispatch(postActivity(input));
             //axios.post("http://localhost:3001/activities", input)
             //     .then(res => alert(res.data))
             //     .catch(err => alert(err)) 
@@ -85,8 +86,8 @@ export default function Form() {
         }
     };
 
-  
-    
+
+
     const handleDelete = ((e, d) => {
         e.preventDefault();
         setInputData({
@@ -96,16 +97,29 @@ export default function Form() {
     });
 
 
-
     const validate = (input) => {
-        let errors = {}
-        if (!input.name) errors.name = 'You MUST fullfill name property!';
-        else if (!input.difficulty < 1 && input.difficulty > 5) errors.difficulty = 'You MUST fullfill difficulty property between 1 to 5!';
-        else if (!input.duration) errors.duration = 'You MUST fullfill duration property!';
-        else if (!input.season) errors.season = 'You MUST fullfill season property!';
+        let errors = {};
 
-        return errors
-    }
+        if (!input.name) {
+            errors.name = 'You MUST fulfill name property!';
+        } else if (activities.map(activity => activity.name).some(name => name === input.name)) {
+            errors.name = "Watch out! That activity already exists"
+        }
+
+        // check the other input properties
+        if (!input.difficulty || input.difficulty < 1 || input.difficulty > 5) {
+            errors.difficulty = 'You MUST fulfill difficulty property between 1 to 5!';
+        }
+        if (!input.duration) {
+            errors.duration = 'You MUST fulfill duration property!';
+        }
+        if (!input.season) {
+            errors.season = 'You MUST fulfill season property!';
+        }
+
+        return errors;
+    };
+
 
 
     return (
@@ -173,6 +187,7 @@ export default function Form() {
         </div>)
 }
 
+//falta ver el tema de subir una imagen del harddrive personal de cada uno, o link de foto//
 
 /* // PARA EL LOGIN //
 /*   <div className={styles.container}>
