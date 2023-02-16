@@ -36,7 +36,7 @@ const Home = () => {
         const totalCountries = countries.length;
         const nextPage = currentPage;
         const firstIndex = nextPage * countriesPerPage; 
-        if (firstIndex >= totalCountries) return; //si el indice es = al total de poke, estoy en el ultimo poke y no puede haber next
+        if (firstIndex >= totalCountries) return; 
 
         setCurrentPage(currentPage + 1);
     }
