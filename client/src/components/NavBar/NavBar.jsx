@@ -4,6 +4,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCountriesByName } from '../../redux/actions';
+import { FcSearch } from 'react-icons/fc'
+import { AiOutlineHome } from 'react-icons/ai'
 
 
 const NavBar = () => {
@@ -18,26 +20,36 @@ const NavBar = () => {
     }
     const handleButtonChange = (e) => {
         e.preventDefault();
-        dispatch(getCountriesByName(name));
+        dispatch(getCountriesByName(name))
+        setName('');
     }
 
-    const handleLinkClick = () => {
+    const handleLinkClick = (e) => {
         setName('');
     }
 
     return (
-        <div className={style.mainContainer}>
-            <Link to='/home' onClick={handleLinkClick}> Home </Link>
-            <Link to='/activities' onClick={handleLinkClick}> FORM </Link>
-            <input
-                type='text'
-                placeholder='Search...'
-                onChange={(e) => handleInputChange(e)}
-            />
-            <button onClick={(e) => handleButtonChange(e)} type='submit'>Search</button>
+        <div >
+            <nav className={style.navbar}>
+                <Link to='/home' onClick={(e) => handleLinkClick(e)} className={style.logo}> {<AiOutlineHome />} </Link>
+                <Link to='/activities' onClick={(e) => handleLinkClick(e)} className = {style.link}> Create an Activity </Link>
+                <Link to='/about' onClick={(e) => handleLinkClick(e)} className = {style.link}> About </Link>
+                <div className={style.search}>
+                    <input
+                        type='text'
+                        placeholder='Search...'
+                        onChange={(e) => handleInputChange(e)}
+                        value={name}
+                    />
+                        <button onClick={(e) => handleButtonChange(e)} type='submit'>
+                            {<FcSearch />}
+                        </button>
+                    </div>
+            </nav>
         </div>
-    )
-}
+    );
+};
+
 
 
 

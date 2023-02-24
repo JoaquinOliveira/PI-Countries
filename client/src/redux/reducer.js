@@ -9,6 +9,8 @@ import {
     FILTERED_BY_CONTINENT,
     ORDERED_BY_NAME,
     ORDERED_BY_POPULATION,
+    DELETE_FAVORITES,
+    ADD_FAVORITES,
     CLEAN,
 } from './types';
 
@@ -17,6 +19,7 @@ const initialState = {
     allCountries: [],
     countriesDetail: [],
     activities: [],
+    myFavorites: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -60,12 +63,12 @@ const rootReducer = (state = initialState, action) => {
 
         case FILTERED_BY_ACTIVITIES:
             const allCountries = state.allCountries
-            const filteredbyActivity = action.payload === 'All'
-            ? allCountries : allCountries.filter((c) => {
+            const filteredbyActivity = action.payload === 'Filter by Activities'
+                ? allCountries : allCountries.filter((c) => {
                     const activities = c.activities.map((a) => a.name)
                     return activities.includes(action.payload)
 
-                    });
+                });
             return {
                 ...state,
                 countries: filteredbyActivity
@@ -112,16 +115,20 @@ const rootReducer = (state = initialState, action) => {
                 countries: state.allCountries
             };
 
+        case ADD_FAVORITES:
+            return {
+                ...state,
+                countries: [...state.countries, action.payload]
+            }
+        case DELETE_FAVORITES:
+            const filtered = state.myFavorites.filter(fav => fav.id !== action.payload)
+            return {
+                ...state,
+                myFavorites: filtered
+            }
+
         default:
             return { ...state }
-
-        //me falta el estado para: 
-        // 1) paginación
-        // 2) add y rmeove favorite?
-
-
-
-
     }
 }
 export default rootReducer;

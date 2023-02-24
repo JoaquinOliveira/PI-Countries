@@ -10,32 +10,49 @@ import {
     FILTERED_BY_CONTINENT,
     ORDERED_BY_NAME,
     ORDERED_BY_POPULATION,
+    ADD_FAVORITES,
+    DELETE_FAVORITES,
     CLEAN,
 } from './types';
 
 
 export const getAllCountries = () => {
     return async function (dispatch) {
-        const apiData = await axios.get('http://localhost:3001/countries')
-        const countries = apiData.data;
-        dispatch({ type: GET_COUNTRIES, payload: countries });
+        try {
+            const apiData = await axios.get('http://localhost:3001/countries')
+            const countries = apiData.data;
+            dispatch({ type: GET_COUNTRIES, payload: countries });
+        } catch (error) {
+            console.error(error);
+            throw new Error("Could not get countries data");
+        }
     };
 }
 
 export const getCountriesByName = (name) => {
     return async function (dispatch) {
-        const apiData = await axios.get(`http://localhost:3001/countries?name=${name}`)
-        const countryByName = apiData.data
-        dispatch({ type: GET_COUNTRIES_BY_NAME, payload: countryByName });
+        try {
+            const apiData = await axios.get(`http://localhost:3001/countries?name=${name}`)
+            const countryByName = apiData.data
+            dispatch({ type: GET_COUNTRIES_BY_NAME, payload: countryByName });
+        } catch (error) {
+            console.error(error);
+            throw new Error("Could not get country data by name");
+        }
     };
 }
 
 
 export const getCountriesById = (id) => {
     return async function (dispatch) {
-        const apiData = await axios.get(`http://localhost:3001/countries/${id}`)
-        const countryById = apiData.data
-        dispatch({ type: GET_COUNTRIES_BY_ID, payload: countryById });
+        try {
+            const apiData = await axios.get(`http://localhost:3001/countries/${id}`)
+            const countryById = apiData.data
+            dispatch({ type: GET_COUNTRIES_BY_ID, payload: countryById });
+        } catch (error) {
+            console.error(error);
+            throw new Error("Could not get country data by id");
+        }
     };
 }
 
@@ -61,9 +78,14 @@ export const filterByActivities = (activities) => {
 //la agrego para tener alguna más
 export const getAllActivities = () => {
     return async function (dispatch) {
-        const apiData = await axios.get('http://localhost:3001/activities')
-        const allActivities = apiData.data
-        dispatch({ type: GET_ACTIVITIES, payload: allActivities });
+        try {
+            const apiData = await axios.get('http://localhost:3001/activities')
+            const allActivities = apiData.data
+            dispatch({ type: GET_ACTIVITIES, payload: allActivities });
+        } catch (error) {
+            console.error(error);
+            throw new Error("Could not get activities data");
+        }
     };
 }
 
@@ -101,6 +123,15 @@ export function Clean() {
         type: CLEAN,
     };
 }
+
+export function addFavorites(id) {
+    return {
+        type: ADD_FAVORITES,
+        payload: id
+    }
+}
+
+
 
 
 /* export let postUser = (data)=>{

@@ -1,7 +1,7 @@
 const { fullDataBase } = require('../controllers/dataBaseController');
 const { Country, Activities } = require('../db');
 
-const searchOptions = {   //me hice esta función por afuera, para que quede más prolijo
+const searchOptions = {   //me hice este objeto por afuera, para que quede más prolijo
     include: {             // intenté modularizarlo en un controller de countries, pero no me funcionaba.
         model: Activities,
         through: {

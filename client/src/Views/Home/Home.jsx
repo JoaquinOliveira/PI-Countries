@@ -1,4 +1,3 @@
-
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import Paginate from '../../components/Paginate/Paginate';
 import { useEffect, useState } from 'react';
@@ -11,6 +10,7 @@ import {
     filterByActivities,
     filterByContinent
 } from '../../redux/actions';
+import style from './Home.module.css'
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -24,10 +24,11 @@ const Home = () => {
         dispatch(getAllActivities());
     }, [dispatch, countries.length]);
 
+
+
+    //PAGINATION. 
     const [currentPage, setCurrentPage] = useState(1);
     const [countriesPerPage, setCountriesPerPage] = useState(10);
-    const [order, setOrder] = useState('');
-
     const indexOfLastCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
     const currentCountry = countries.slice(indexOfFirstCountry, indexOfLastCountry);
@@ -35,8 +36,8 @@ const Home = () => {
     function nextHandler() {
         const totalCountries = countries.length;
         const nextPage = currentPage;
-        const firstIndex = nextPage * countriesPerPage; 
-        if (firstIndex >= totalCountries) return; 
+        const firstIndex = nextPage * countriesPerPage;
+        if (firstIndex >= totalCountries) return;
 
         setCurrentPage(currentPage + 1);
     }
@@ -47,37 +48,63 @@ const Home = () => {
         setCurrentPage(prevPage);
     }
 
+
+    //FILTROS Y ORDENAMIENTOS.
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [filters, setFilters] = useState({
+        orderBy: 'All',
+        orderByPop: 'All',
+        filter: 'All',
+        filterBy: 'All',
+    });
+
+
     const handleOrderByName = (e) => {
         e.preventDefault();
         dispatch(orderByName(e.target.value));
         setCurrentPage(1);
-        setOrder(`Ordered ${e.target.value}`);
+        setFilters({ ...filters, orderBy: e.target.value });
     };
 
     const handleOrderByPopulation = (e) => {
         e.preventDefault();
         dispatch(orderByPopulation(e.target.value));
         setCurrentPage(1);
-        setOrder(`Ordered ${e.target.value}`);
+        setFilters({ ...filters, orderByPop: e.target.value });
     };
 
+
+
     const handleFilterByActivities = (e) => {
+        //setIsLoading(true);
         e.preventDefault();
         dispatch(filterByActivities(e.target.value));
         setCurrentPage(1);
-        setOrder(`Ordered ${e.target.value}`);
+        setFilters({ ...filters, filter: e.target.value });
+        //setIsLoading(false);
     };
 
     const handleFilterByContinent = (e) => {
         e.preventDefault();
         dispatch(filterByContinent(e.target.value));
         setCurrentPage(1);
-        setOrder(`Ordered ${e.target.value}`);
+        setFilters({ ...filters, filterBy: e.target.value });
     };
 
-    const handleAllCharacters = () => {
+    const handleAllCountries = () => {
+        setFilters({
+            orderBy: 'All',
+            orderByPop: 'All',
+            filter: 'All',
+            filterBy: 'All',
+
+        })
         dispatch(getAllCountries());
+        setCurrentPage(1);
+
     };
+
 
     const paginated = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -85,27 +112,27 @@ const Home = () => {
 
 
     return (
-        <>
-            <h1>Esta es la vista de Home</h1>
-            <button onClick={(e) => handleAllCharacters(e.target.value)}>All Characters!</button>
-            <div>
-                <select name='Order by name' onChange={(e) => handleOrderByName(e)}>
-                    <option value="">Order by Name</option>
+        <div className={style.container}>
+            <div className={style.filters}>
+                <select name='Order by name' value={filters.orderBy} onChange={(e) => handleOrderByName(e)}>
+                    <option value="All">Order by Name</option>
                     <option value='asc'>Ascendente</option>
                     <option value='des'>Descendente</option>
                 </select>
-                <select name="Order by population" onChange={(e) => handleOrderByPopulation(e)}>
-                    <option value="">Order by Population</option>
+                <select name="Order by population" id='Order by population' value={filters.orderByPop} onChange={(e) => handleOrderByPopulation(e)}>
+                    <option value="All">Order by Population</option>
                     <option value='asc'>Ascendente</option>
                     <option value='des'>Descendente</option>
                 </select>
-                <select name="Filter by Activities" onChange={(e) => handleFilterByActivities(e)}>
-                    <option value="All">All Countries</option>
+
+
+                <select name="Filter by Activities" id='Filter by Activities' value={filters.filter} onChange={(e) => handleFilterByActivities(e)}>
+                    <option value="All">Filter by Activities</option>
                     {activities.map((a) => (
                         <option value={a.name} key={a.id}>{a.name}</option>
                     ))}
                 </select>
-                <select name="Filter by Continents" onChange={(e) => handleFilterByContinent(e)}>
+                <select name="Filter by Continents" id='Filter by Continents' value={filters.filterBy} onChange={(e) => handleFilterByContinent(e)}>
                     <option value='All'>Filter by Continents</option>
                     <option value='Antarctica'>Antarctica</option>
                     <option value='North America'>North America</option>
@@ -115,20 +142,27 @@ const Home = () => {
                     <option value='Africa'>Africa</option>
                     <option value='Oceania'>Oceania</option>
                 </select>
+                <button className={style.btn} onClick={(e) => handleAllCountries(e.target.value)}>Reset FILTERS</button>
             </div>
-            <Paginate paginated={paginated}
-                allCountries={countries.length}
-                countriesPerPage={countriesPerPage}
-                currentPage={currentPage}
-                nextHandler={nextHandler}
-                prevHandler={prevHandler} />
 
-            <CardsContainer currentCountry={currentCountry}
+            <div className={style.mainContent}>
+                <Paginate paginated={paginated}
+                    allCountries={countries.length}
+                    countriesPerPage={countriesPerPage}
+                    currentPage={currentPage}
+                    nextHandler={nextHandler}
+                    prevHandler={prevHandler} />
+                    <div className={style.results}>
+                        <CardsContainer currentCountry={currentCountry} />
+                    </div>
+                
+            </div>
 
-            />
 
 
-        </>
+
+
+        </div >
     )
 }
 

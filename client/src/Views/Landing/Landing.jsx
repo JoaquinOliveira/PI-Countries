@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import About from '../About/About'
+import styles from './Landing.module.css';
 
 const Landing = () => {
+
     return (
         <div>
-            <h1>Esta es la vista de Landing</h1>
-            <Link to = '/home'>
-                <button> Ingresar </button>
+            <About />
+            <Link to='/home'>
+                <button className={styles.btn}> Ingresar </button>
             </Link>
         </div>
     )
@@ -14,3 +17,8 @@ const Landing = () => {
 
 
 export default Landing;
+
+
+
+
+
