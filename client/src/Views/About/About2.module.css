@@ -1,0 +1,54 @@
+.front,
+.container .back {
+  margin-top: 150px;
+  margin-left: 500px;
+  border: 1px solid #69b3f8;
+  background-color: rgba(24, 144, 255, 0.20); 
+  border-radius: 10px;
+  width: 300px;
+  padding: 10px;
+  font-size: smaller;
+  box-shadow: 0 0 15px  rgba(24, 144, 255, 0.20); 
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.image {
+  width: 90%;
+  border: 1px solid #69b3f8;
+  border-radius: 10px;
+}
+
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.front {
+  z-index: 2;
+  transition: all 1s linear;
+}
+.back {
+  transition: all 1s linear;
+  transform: rotateY(180deg);
+}
+.container {
+  transform-style: preserve-3d;
+  perspective: 500px;
+
+}
+
+.container:hover .front {
+  transform: rotateY(180deg);
+
+}
+.container:hover .back {
+  transform: rotateY(360deg);
+
+}
+.h2 {
+  color: black;
+}

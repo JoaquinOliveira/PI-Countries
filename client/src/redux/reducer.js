@@ -20,6 +20,7 @@ const initialState = {
     countriesDetail: [],
     activities: [],
     myFavorites: [],
+    filteredCountries: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -67,7 +68,6 @@ const rootReducer = (state = initialState, action) => {
                 ? allCountries : allCountries.filter((c) => {
                     const activities = c.activities.map((a) => a.name)
                     return activities.includes(action.payload)
-
                 });
             return {
                 ...state,
@@ -109,11 +109,18 @@ const rootReducer = (state = initialState, action) => {
                 countries: sortedByPopulation
             };
 
-        case CLEAN:
-            return {
-                ...state,
-                countries: state.allCountries
-            };
+            case CLEAN:
+                if (action.payload === "detail") {
+                    return {
+                        ...state,
+                        countriesDetail: {},
+                    };
+                } else {
+                    return {
+                        ...state,
+                        countries: state.allCountries,
+                    };
+                }
 
         case ADD_FAVORITES:
             return {

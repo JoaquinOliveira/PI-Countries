@@ -23,8 +23,7 @@ export const getAllCountries = () => {
             const countries = apiData.data;
             dispatch({ type: GET_COUNTRIES, payload: countries });
         } catch (error) {
-            console.error(error);
-            throw new Error("Could not get countries data");
+            throw new Error(error);
         }
     };
 }
@@ -36,8 +35,7 @@ export const getCountriesByName = (name) => {
             const countryByName = apiData.data
             dispatch({ type: GET_COUNTRIES_BY_NAME, payload: countryByName });
         } catch (error) {
-            console.error(error);
-            throw new Error("Could not get country data by name");
+           alert('There is no country with such name! Try Again')
         }
     };
 }
@@ -50,8 +48,7 @@ export const getCountriesById = (id) => {
             const countryById = apiData.data
             dispatch({ type: GET_COUNTRIES_BY_ID, payload: countryById });
         } catch (error) {
-            console.error(error);
-            throw new Error("Could not get country data by id");
+            throw new Error(error);
         }
     };
 }
@@ -98,7 +95,7 @@ export function postActivity(payload) {
                 payload: apiData,
             };
         } catch (error) {
-            console.error(error);
+            alert('Could not create Activity. Try Again!')
             throw new Error("Could not create activity");
         }
     };
@@ -118,11 +115,12 @@ export function deleteActivity(id) {
     };
 };
 
-export function Clean() {
+export const Clean = (payload) => {
     return {
-        type: CLEAN,
+        type: "CLEAN",
+        payload: payload,
     };
-}
+};
 
 export function addFavorites(id) {
     return {

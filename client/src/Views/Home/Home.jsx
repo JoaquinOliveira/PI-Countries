@@ -26,31 +26,8 @@ const Home = () => {
 
 
 
-    //PAGINATION. 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [countriesPerPage, setCountriesPerPage] = useState(10);
-    const indexOfLastCountry = currentPage * countriesPerPage;
-    const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-    const currentCountry = countries.slice(indexOfFirstCountry, indexOfLastCountry);
-
-    function nextHandler() {
-        const totalCountries = countries.length;
-        const nextPage = currentPage;
-        const firstIndex = nextPage * countriesPerPage;
-        if (firstIndex >= totalCountries) return;
-
-        setCurrentPage(currentPage + 1);
-    }
-
-    function prevHandler() {
-        const prevPage = currentPage - 1;
-        if (prevPage < 0) return;
-        setCurrentPage(prevPage);
-    }
-
-
     //FILTROS Y ORDENAMIENTOS.
-    const [isLoading, setIsLoading] = useState(false);
+    //const [isLoading, setIsLoading] = useState(false);
 
     const [filters, setFilters] = useState({
         orderBy: 'All',
@@ -58,6 +35,47 @@ const Home = () => {
         filter: 'All',
         filterBy: 'All',
     });
+
+
+    const filteredCountries = countries
+        .filter(country => {
+            // Filtrar por actividad
+            if (filters.filter !== 'All') {
+                return country.activities.some(activity => activity.name === filters.filter);
+            }
+            // Filtrar por continente
+            if (filters.filterBy !== 'All') {
+                return country.continents === filters.filterBy;
+            }
+            return true; // Si no se seleccionó ningún filtro, mostrar todos los países
+        })
+        .sort((a, b) => {
+            // Ordenar por población
+            if (filters.orderByPop === 'asc') {
+                if (a.population < b.population) return -1;
+                if (a.population > b.population) return 1;
+                // Si tienen la misma población, comparar por nombre
+                return a.name.localeCompare(b.name);
+            } else if (filters.orderByPop === 'des') {
+                if (a.population > b.population) return -1;
+                if (a.population < b.population) return 1;
+                // Si tienen la misma población, comparar por nombre
+                return a.name.localeCompare(b.name);
+            }
+
+            // Ordenar por nombre
+            if (filters.orderBy === 'asc') {
+                return a.name.localeCompare(b.name);
+            } else if (filters.orderBy === 'des') {
+                return b.name.localeCompare(a.name);
+            } else {
+                return 0; // Si no se seleccionó ningún ordenamiento por nombre, no cambiar el orden de los países
+            }
+        });
+        
+
+
+
 
 
     const handleOrderByName = (e) => {
@@ -105,6 +123,28 @@ const Home = () => {
 
     };
 
+    //PAGINATION. 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [countriesPerPage, setCountriesPerPage] = useState(10);
+    const indexOfLastCountry = currentPage * countriesPerPage;
+    const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+    const currentCountry = filteredCountries.slice(indexOfFirstCountry, indexOfLastCountry);
+
+
+    function nextHandler() {
+        const totalCountries = countries.length;
+        const nextPage = currentPage;
+        const firstIndex = nextPage * countriesPerPage;
+        if (firstIndex >= totalCountries) return;
+
+        setCurrentPage(currentPage + 1);
+    }
+
+    function prevHandler() {
+        const prevPage = currentPage - 1;
+        if (prevPage < 0) return;
+        setCurrentPage(prevPage);
+    }
 
     const paginated = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -146,16 +186,15 @@ const Home = () => {
             </div>
 
             <div className={style.mainContent}>
+                <div className={style.results}>
+                    <CardsContainer currentCountry={currentCountry} />
+                </div>
                 <Paginate paginated={paginated}
-                    allCountries={countries.length}
+                    allCountries={filteredCountries.length}
                     countriesPerPage={countriesPerPage}
                     currentPage={currentPage}
                     nextHandler={nextHandler}
                     prevHandler={prevHandler} />
-                    <div className={style.results}>
-                        <CardsContainer currentCountry={currentCountry} />
-                    </div>
-                
             </div>
 
 

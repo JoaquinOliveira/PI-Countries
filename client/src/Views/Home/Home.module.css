@@ -5,6 +5,9 @@
   box-shadow: 0 8px 32px 0 rgba(24, 144, 255, 0.06); 
   margin: 0.5rem 0.7rem;
   border-radius: 0.3rem;
+  width: 100%;
+  height: 100vh;
+
 }
 
 .filters {
@@ -29,19 +32,51 @@
   border: none;
 }
 select {
-  border-radius: 0.2rem;
-  height: 1.5rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin: 30px
+  appearance: none; /* Eliminar la apariencia nativa */
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ddd; /* Borde */
+  padding: 8px 12px; /* Espacio interno */
+  font-size: 16px; /* Tamaño de fuente */
+  font-weight: 400; /* Grosor de fuente */
+  line-height: 1.5; /* Altura de línea */
+  border-radius: 4px; /* Bordes redondeados */
+  width: 100%; /* Ancho */
+  max-width: 300px; /* Ancho máximo */
+  cursor: pointer; /* Cursor */
 }
 
-option {
-  border-radius: 0.2rem;
-  height: 1.5rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin: 30px
+/* Estilo para las opciones del select */
+select option {
+  background-color: #fff; /* Color de fondo */
+  color: #333; /* Color de fuente */
+  font-size: 16px; /* Tamaño de fuente */
+  font-weight: 400; /* Grosor de fuente */
+  line-height: 1.5; /* Altura de línea */
+}
+
+/* Estilo para el icono desplegable del select */
+select::-ms-expand {
+  display: none; /* Ocultar en Internet Explorer */
+}
+
+select::after {
+  content: "\25BC"; /* Código del icono */
+  position: absolute; /* Posición */
+  top: 50%; /* Alineación vertical */
+  right: 12px; /* Alineación horizontal */
+  transform: translateY(-50%); /* Alinear verticalmente */
+  pointer-events: none; /* No capturar eventos */
+}
+
+/* Estilo para el hover del select */
+select:hover {
+  border-color: #999; /* Cambiar el color del borde al pasar el mouse */
+}
+
+/* Estilo para el focus del select */
+select:focus {
+  outline: none; /* Eliminar el contorno del focus */
+  
 }
 .btn {
     padding: 0.5rem 1rem;
@@ -82,4 +117,70 @@ option {
   display: inline-block;
   font-weight: bold;
   margin-right: 10px;
+}
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .mainContent {
+    margin-left: 0;
+  }
+  
+  .filters {
+    grid-column: 1 / -1;
+    position: static;
+    align-self: center;
+    justify-self: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: none;
+  }
+  
+  .filters ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .filters li {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+  
+  select {
+    width: 100%;
+    margin: 10px 0;
+    font-size: 0.8rem;
+  }
+  
+  .btn {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .filters {
+    width: 100%;
+    position: static;
+    box-shadow: none;
+    padding: 0;
+    background-color: transparent;
+    margin-top: 20px;
+  }
+
+  .filters h2 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+  }
+
+  select {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  option {
+    margin: 0;
+  }
 }

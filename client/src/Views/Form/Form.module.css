@@ -1,44 +1,112 @@
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
   margin-top: 70px;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-  margin: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-gap: 5px;
   background-color: rgba(24, 144, 255, 0.06);
   border-radius: 0.5rem;
-  padding: 20px;
-}
+  max-width: 100%;
+  min-height: 100%
 
+}
+.title {
+  grid-row: 1/3;
+  grid-column: 1/2;
+  color: black;
+  font-weight: bold;
+  justify-self: center;
+}
 .label {
   font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.label select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-}
-
-.season-select {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 8px 0;
 }
 
+.name {
+  grid-row: 3/5;
+  grid-column: 1/2;
+  justify-self: start;
+  align-self: start;
+  margin-left: 40px;
+}
+
+.difficulty {
+  grid-row: 5/7;
+  grid-column: 1/2;
+  justify-self: start;
+  align-self: start;
+  margin-left: 40px;
+
+}
+
+.duration {
+  grid-row: 7/9;
+  grid-column: 1/2;
+  justify-self: start;
+  align-self: start;
+  margin-left: 40px;
+}
+
+.diff {
+  height: 1.3rem;
+  width: 2rem;
+  border: 2px solid #1890ff;
+  border-radius: 4px;
+  margin-left: 10px;
+
+}
+.dura {
+  height: 1.3rem;
+  width: 2rem;
+  border: 2px solid #1890ff;
+  border-radius: 4px;
+  margin-left: 12px;
+
+}
+
+.input[type="text"] {
+  height: 1rem;
+  border: 2px solid#1890ff;
+  border-radius: 4px;
+  margin-left: 10px;
+
+}
+
+.select {
+  grid-row: 9/11;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 40px;
+  margin-top: 10px
+}
+
+.season {
+  font-weight: bold;
+  justify-self: start;
+  align-self: start;
+  margin-bottom: 10px;
+}
+.summer {
+  margin-left: 10px;
+}
+.fall {
+  margin-left: 15px;
+}
+.spring {
+  margin-left: 15px;
+}
+
+.winter {
+  margin-left: 15px;
+}
 .btnSubmit {
   cursor: pointer;
   background-color: #1890ff;
@@ -48,9 +116,10 @@
   border-radius: 0.5rem;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin-top: 20px;
+  width: 45%;
+  justify-self: center;
+  align-self: center;
 }
 
 .btnSubmit:hover {
@@ -67,10 +136,9 @@
   border-radius: 0.5rem;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  font-size: 10px;
   margin-top: 20px;
-  margin-right: 20px;
+  margin-left: 330px;
 }
 
 .btn:hover {
@@ -80,12 +148,10 @@
 }
 
 .danger {
-  font-size: 10px;
+  font-size: 13px;
   color: red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
+  display: inline-flex;
+  margin-left: 1rem;
 }
 
 .warning {
@@ -93,19 +159,33 @@
   border-radius: 0.2em;
 }
 
-.close {
-  display: inline-block;
-  margin-right: 10px;
-  white-space: nowrap;
+.countries {
+  margin-top: -30px;
 }
 
-.country-input {
-  display: inline-block;
+.country {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
   justify-content: center;
-  width: auto;
-  white-space: nowrap;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 10px;
-  vertical-align: top;
+
 }
+
+.btn3 {
+  cursor: pointer;
+  border: none;
+  color: black;
+  background-color: rgba(24, 144, 255, 0.06);
+  border-radius: 3px;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #1890ff;
+
+}
+
+

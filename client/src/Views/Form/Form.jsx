@@ -110,7 +110,7 @@ export default function Form() {
         if (!input.name) {
             errors.name = 'You MUST fulfill name property!';
         } else if (activities.map(activity => activity.name).some(name => name === input.name)) {
-            errors.name = "Watch out! That activity already exists"
+            errors.name = "That activity already exists"
         }
         if (!input.difficulty || input.difficulty < 1 || input.difficulty > 5) {
             errors.difficulty = 'You MUST fulfill difficulty property between 1 to 5!';
@@ -130,18 +130,19 @@ export default function Form() {
     return (
         <div className={style.container}>
             <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
-                <div>
+                <h2 className={style.title}>Activity</h2>
+                <div className={style.name}>
                     <label className={style.label}>Name:</label>
                     <input
                         type='text'
                         value={input.name}
                         name='name'
                         onChange={(e) => handleInputChange(e)}
-                        className={style.input}
+                        className={errors.name ? style.warning : style.input}
                     />
                     {<p className={style.danger}>{errors.name ? errors.name : null}</p>}
                 </div>
-                <div>
+                <div className={style.difficulty}>
                     <label className={style.label}>Difficulty:</label>
                     <input
                         type='number'
@@ -150,54 +151,62 @@ export default function Form() {
                         value={input.difficulty}
                         name='difficulty'
                         onChange={(e) => handleInputChange(e)}
-                        className={style.input}
+                        className={errors.difficulty ? style.warning : style.diff}
                     />
                     {<p className={style.danger}>{errors.difficulty ? errors.difficulty : null}</p>}
                 </div>
-                <div>
+                <div className={style.duration}>
                     <label className={style.label}>Duration:</label>
                     <input
                         type='number'
                         value={input.duration}
                         name='duration'
                         onChange={(e) => handleInputChange(e)}
-                        className={style.input}
+                        className={errors.duration ? style.warning : style.dura}
                     />
                     {<p className={style.danger}>{errors.duration ? errors.duration : null}</p>}
                 </div>
-                <div>
+                <div className={style.select}>
 
-                    <label>Season: </label>
-                    <input type="radio" id='spring' name='season' value='spring' onChange={(e) => handleInputChange(e)} />
-                    <label htmlFor='spring'>🌻 Spring</label>
-
-                    <input type="radio" id='summer' name='season' value='summer' onChange={(e) => handleInputChange(e)} />
-                    <label htmlFor='summer'>🏖 Summer</label>
-
-
-                    <input type="radio" id='fall' name='season' value='fall' onChange={(e) => handleInputChange(e)} />
-                    <label htmlFor='fall'>🍂 Fall</label>
-
-                    <input type="radio" id='winter' name='season' value='winter' onChange={(e) => handleInputChange(e)} />
-                    <label htmlFor='winter'>❄️ Winter</label>
-
+                    <span className={style.season}>Season: </span>
+                    <div >
+                        <input className={style.springInput} type="radio" id='spring' name='season' value='spring' onChange={(e) => handleInputChange(e)} />
+                        <label className={style.spring} htmlFor='spring'>Spring  🌻</label>
+                    </div>
+                    <div className={style.sumerInput}>
+                        <input type="radio" id='summer' name='season' value='summer' onChange={(e) => handleInputChange(e)} />
+                        <label className={style.summer} htmlFor='summer'> Summer  🏖</label>
+                    </div>
+                    <div className={style.fallInput}>
+                        <input type="radio" id='fall' name='season' value='fall' onChange={(e) => handleInputChange(e)} />
+                        <label className={style.fall} htmlFor='fall'>Fall  🍂 </label>
+                    </div>
+                    <div className={style.winterInput}>
+                        <input type="radio" id='winter' name='season' value='winter' onChange={(e) => handleInputChange(e)} />
+                        <label className={style.winter} htmlFor='winter'>Winter  🍂</label>
+                    </div>
 
 
                     {<p className={style.danger}>{errors.season ? errors.season : null}</p>}
                 </div>
-                <select value='countryId' onChange={(e) => handleSelect(e)}>
-                    {countriesNames.map(country => {
-                        return <option key={country.value} value={country.value}>{country.label}</option>
-                    })}
-                </select>
-                <div className={style.country - input}>
+                <div className={style.countries}>
+                    <select value='countryId' onChange={(e) => handleSelect(e)}>
+                        <option selected>Choose a Country</option>
+                        {countriesNames.sort((a, b) => a.label.localeCompare(b.label)).map(country => {
+                            return <option key={country.value} value={country.value}>{country.label}</option>
+                        })}
+                    </select>
+                </div>
+
+
+                <div className={style.country}>
                     {input.countryId.filter((c, index, arr) => arr.indexOf(c) === index).map((c, index) => ( //filtro y hago un indexOf para que solo pueda coincidir 1 vez con el país que busco
-                        <div className={style.close} key={index}>
-                            {c}
-                            <button className={style.btn2} onClick={(e) => handleDelete(e, c)}>X</button>
+                        <div key={index}>
+                            <button className={style.btn3} onClick={(e) => handleDelete(e, c)}>{c} X</button>
                         </div>
                     ))}
                 </div>
+
 
 
                 {/* <label>Choose a picture to upload...</label>

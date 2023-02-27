@@ -7,8 +7,10 @@
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
-  margin-bottom: 15px;
-  margin-right: 12.5px;
+  margin-top: 3rem;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
   
 }
 
@@ -18,14 +20,11 @@
 }
 
 .card img {
-  width: 150px;
-  height: 100px;
+  width: 100px;
+  height: 75px;
   object-fit: cover;
 }
 
-.card {
-  padding: 20px;
-}
 
 .card h2 {
   font-size: 1.5rem;
@@ -71,3 +70,24 @@ border: 1px solid  #1890ff;;
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 576px) {
+  .card h2 {
+    font-size: 1.2rem;
+    max-width: 150px;
+  }
+  
+  .card h3 {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {}
+  .card h2 {
+    font-size: 0.8rem;
+    max-width: 120px;
+  }
+  
+  .card h3 {
+    font-size: 0.7rem;
+  }

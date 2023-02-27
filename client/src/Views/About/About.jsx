@@ -1,19 +1,51 @@
 import React from "react";
-import styles from './About.module.css'
-export default function About() {
+import imgJoaco from "../../Assets/WhatsApp Image 2023-02-23 at 11.58.54.jpeg";
+import s from './About.module.css';
+import { AiFillLinkedin, AiFillGithub, AiFillFacebook } from 'react-icons/ai';
+import { FaChevronUp } from 'react-icons/fa';
+import Footer from '../Footer/Footer';
+
+
+function About() {
+    function scrollToLanding() {
+        const landing = document.getElementById("landing");
+        if (landing) {
+          landing.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+console.log(scrollToLanding())
     return (
-        <div className={styles.container}>
-            <div className={styles.front}>
-                <img className={styles.image} src={require('../../Assets/WhatsApp Image 2023-02-23 at 11.58.54.jpeg')} alt="Foto de Perfil" />
-                <h2 className={styles.data}>Joaquín S. Oliveira</h2>
-            </div>
-            <div className={styles.back}>
-                <h2>{'Id: '} 1</h2>
-                <h2>{'Country: '} Argentina</h2>
-                <h2>{'Job: '} Lawyer & Future Front-end-Developer</h2>
-                <h2>{'Activities: '} <p>Fútbol</p> <p>Tenis</p><p>Family</p></h2>
-                <h2>Creador de esta app</h2>
-            </div>
-        </div>
-    );
+        <>
+
+            <section id="about" className={s.aboutSection}>
+                <div className={s.cardsContainer}>
+              
+                        <FaChevronUp onClick={(e) => scrollToLanding(e)} className={s.flecha} />
+                  
+                    <div className={s.titulo}>Creador</div>
+                    <div className={s.card}>
+                        <div className={s.divImg}>
+                            <img className={s.img} src={imgJoaco} alt="img" />
+                        </div>
+                        <h3 className={s.apodo}>JOACO</h3>
+                        <h2 className={s.nombreCompleto}>Joaquín Santiago Oliveira</h2>
+
+                        <a href="https://github.com/fr0st1987"> <AiFillGithub className={s.gitHub} icon={AiFillGithub} /> </a>
+
+                        <a href="https://www.linkedin.com/in/joaquin-santiago-oliveira"> <AiFillLinkedin className={s.linkedin} icon={AiFillLinkedin} /> </a>
+
+                        <a href="https://www.facebook.com/joliveira1987"> <AiFillFacebook className={s.linkedin} icon={AiFillFacebook} /> </a>
+                    </div>
+                </div>
+        
+                
+            <Footer />
+           
+            </section>
+            
+
+        </>
+    )
 }
+
+export default About;

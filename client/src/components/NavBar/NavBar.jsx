@@ -22,6 +22,7 @@ const NavBar = () => {
         e.preventDefault();
         dispatch(getCountriesByName(name))
         setName('');
+
     }
 
     const handleLinkClick = (e) => {
@@ -32,7 +33,7 @@ const NavBar = () => {
         <div >
             <nav className={style.navbar}>
                 <Link to='/home' onClick={(e) => handleLinkClick(e)} className={style.logo}> {<AiOutlineHome />} </Link>
-                <Link to='/activities' onClick={(e) => handleLinkClick(e)} className = {style.link}> Create an Activity </Link>
+                <Link to='/activities' onClick={(e) => handleLinkClick(e)} className = {style.link}> Create Activity </Link>
                 <Link to='/about' onClick={(e) => handleLinkClick(e)} className = {style.link}> About </Link>
                 <div className={style.search}>
                     <input
