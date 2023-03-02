@@ -1,10 +1,13 @@
 import React from 'react';
-
+import style from './Footer.module.css'
 const Footer = () => {
     return (
-        <>
-        soy Footer
-        </>
+        <div className={style.footer}>
+            <section className={style.rights}>
+                <p>© ALL RIGHTS RESERVED |  COUNTRIES.COM</p>
+            </section>
+        </div>
+
     )
 }
 

@@ -1,21 +1,23 @@
 .container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
   justify-content: center;
-  margin-top: 70px;
+  margin-top: 60px;
+  margin-bottom: 45px;
+  width: 100%;
+  height: 100%;
 }
 
 .form {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto 1fr;
-  grid-gap: 5px;
+
   background-color: rgba(24, 144, 255, 0.06);
   border-radius: 0.5rem;
-  max-width: 100%;
-  min-height: 100%
-
+  height: 100%;
+  width: 100%;
 }
+
 .title {
   grid-row: 1/3;
   grid-column: 1/2;
@@ -25,15 +27,12 @@
 }
 .label {
   font-weight: bold;
-  display: inline-flex;
-  align-items: center;
 }
 
 .name {
   grid-row: 3/5;
   grid-column: 1/2;
   justify-self: start;
-  align-self: start;
   margin-left: 40px;
 }
 
@@ -41,53 +40,58 @@
   grid-row: 5/7;
   grid-column: 1/2;
   justify-self: start;
-  align-self: start;
   margin-left: 40px;
-
 }
 
 .duration {
   grid-row: 7/9;
   grid-column: 1/2;
   justify-self: start;
-  align-self: start;
   margin-left: 40px;
 }
 
 .diff {
-  height: 1.3rem;
-  width: 2rem;
+  height: 18px;
+  width: 120px;
   border: 2px solid #1890ff;
   border-radius: 4px;
-  margin-left: 10px;
-
+  margin-left: 30px;
+  max-width: 120px;
+  min-width: 120px;
 }
 .dura {
-  height: 1.3rem;
-  width: 2rem;
+  height: 18px;
+  width: 120px;
   border: 2px solid #1890ff;
   border-radius: 4px;
-  margin-left: 12px;
-
+  margin-left: 31px;
+  max-width: 120px;
+  min-width: 120px;
 }
 
-.input[type="text"] {
-  height: 1rem;
-  border: 2px solid#1890ff;
+.inputName {
+  height: 18px;
+  width: 120px;
+  border: 2px solid #1890ff;
   border-radius: 4px;
-  margin-left: 10px;
-
+  margin-left: 54px;
+  max-width: 120px;
+  min-width: 120px;
 }
 
 .select {
-  grid-row: 9/11;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 40px;
-  margin-top: 10px
+  margin-top: 10px;
 }
 
+.countries {
+  display: flex;
+  margin-left: 10px;
+  margin-top: -20px;
+}
 .season {
   font-weight: bold;
   justify-self: start;
@@ -138,7 +142,7 @@
   text-decoration: none;
   font-size: 10px;
   margin-top: 20px;
-  margin-left: 330px;
+  margin-left: 430px;
 }
 
 .btn:hover {
@@ -147,30 +151,99 @@
   border: 1px solid #1890ff;
 }
 
-.danger {
+.dangerName {
+  max-width: 15rem;
   font-size: 13px;
   color: red;
-  display: inline-flex;
-  margin-left: 1rem;
+  max-height: 1.5rem;
+  height: 1.5rem;
+  height: 0.01rem;
 }
 
-.warning {
-  border: solid red 1px;
-  border-radius: 0.2em;
+.dangerDiff {
+  max-width: 15rem;
+  max-height: 1.5rem;
+  height: 1.5rem;
+  font-size: 13px;
+  color: red;
+  margin-left: 2rem;
+  height: 0.01rem;
 }
 
-.countries {
-  margin-top: -30px;
+.dangerDura {
+  max-width: 15rem;
+  font-size: 13px;
+  color: red;
+  margin-left: 1.7rem;
+  max-height: 1.5rem;
+  height: 0.01rem;
+  margin-right: 0.7rem;
+}
+
+.dangerSeason {
+  max-width: 15rem;
+  font-size: 13px;
+  color: red;
+  margin-left: 2.8rem;
+  max-height: 1.5rem;
+  height: 0.1rem;
+}
+
+.warningDiff {
+  height: 18px;
+  width: 120px;
+  border: solid red 2px;
+  border-radius: 4px;
+  margin-left: 30px;
+  max-width: 120px;
+  min-width: 120px;
+}
+.warningDura {
+  height: 18px;
+  width: 120px;
+  border: solid red 2px;
+  border-radius: 4px;
+  margin-left: 31px;
+  max-width: 120px;
+  min-width: 120px;
+}
+.image {
+  grid-row: 13/15;
+  grid-column: 1/2;
+  justify-self: start;
+  margin-left: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.selectedImage {
+  display: grid;
+  grid-row: 13/15;
+  grid-column: 1/2;
+  margin-left: 300px;
+  width: 75px;
+  height: 75px;
+  border: 1px solid black;
+  border-radius: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.warningName {
+  height: 18px;
+  width: 120px;
+  border: solid red 2px;
+  border-radius: 4px;
+  margin-left: 54px;
+  max-width: 120px;
+  min-width: 120px;
 }
 
 .country {
   display: grid;
+  grid-row: 11/13;
+  grid-column: 1/2;
   grid-template-columns: repeat(5, 20%);
-  justify-content: center;
-  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
 
 .btn3 {
@@ -185,7 +258,19 @@
   font-size: 10px;
   margin-bottom: 10px;
   border: 1px solid #1890ff;
-
 }
 
-
+.btnNoSubmit {
+  cursor: pointer;
+  background-color: grey;
+  color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  width: 45%;
+  justify-self: center;
+  align-self: center;
+}

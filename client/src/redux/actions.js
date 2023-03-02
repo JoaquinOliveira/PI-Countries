@@ -14,6 +14,7 @@ import {
     DELETE_FAVORITES,
     CLEAN,
 } from './types';
+import Swal from 'sweetalert2';
 
 
 export const getAllCountries = () => {
@@ -35,7 +36,12 @@ export const getCountriesByName = (name) => {
             const countryByName = apiData.data
             dispatch({ type: GET_COUNTRIES_BY_NAME, payload: countryByName });
         } catch (error) {
-           alert('There is no country with such name! Try Again')
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `There is no country with such name! Try Again`,
+                footer: '<a href="/home">Why do I have this issue?</a>'
+            })
         }
     };
 }
@@ -80,7 +86,6 @@ export const getAllActivities = () => {
             const allActivities = apiData.data
             dispatch({ type: GET_ACTIVITIES, payload: allActivities });
         } catch (error) {
-            console.error(error);
             throw new Error("Could not get activities data");
         }
     };
@@ -95,8 +100,13 @@ export function postActivity(payload) {
                 payload: apiData,
             };
         } catch (error) {
-            alert('Could not create Activity. Try Again!')
-            throw new Error("Could not create activity");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Could not create Activity. Try Again!`,
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+           
         }
     };
 }
@@ -128,6 +138,14 @@ export function addFavorites(id) {
         payload: id
     }
 }
+
+export function deleteFavorites (id){
+        return {
+            type: DELETE_FAVORITES,
+            payload: id
+        }
+    }
+
 
 
 

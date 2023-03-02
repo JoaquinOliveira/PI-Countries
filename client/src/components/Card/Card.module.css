@@ -7,10 +7,6 @@
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
-  margin-top: 3rem;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
   
 }
 
@@ -30,7 +26,7 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  max-width: 200px;
+ 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -41,7 +37,25 @@
   color: black;
 }
 
-.card button {
+.btnFav {
+  display:flex;
+  justify-content: center;
+  justify-self: flex-end;
+  background-color: #1890ff;
+  color: white;
+  border: 1px solid #69b3f8;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  
+}
+
+.btnFav:hover {
+background-color: #69b3f8; 
+border: 1px solid  #1890ff;;
+}
+
+.btnDetails {
   padding: 0.5rem 1rem;
   background-color: #1890ff;
   color: white;
@@ -52,7 +66,7 @@
   
 }
 
-.card button:hover {
+.btnDetails:hover {
 background-color: #69b3f8; 
 border: 1px solid  #1890ff;;
 }
@@ -70,24 +84,3 @@ border: 1px solid  #1890ff;;
     opacity: 1;
   }
 }
-
-@media screen and (max-width: 576px) {
-  .card h2 {
-    font-size: 1.2rem;
-    max-width: 150px;
-  }
-  
-  .card h3 {
-    font-size: 1rem;
-  }
-}
-
-@media screen and (max-width: 576px) {}
-  .card h2 {
-    font-size: 0.8rem;
-    max-width: 120px;
-  }
-  
-  .card h3 {
-    font-size: 0.7rem;
-  }

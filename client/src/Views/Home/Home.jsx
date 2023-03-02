@@ -3,19 +3,18 @@ import Paginate from '../../components/Paginate/Paginate';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+    filterByContinent,
     getAllActivities,
     getAllCountries,
-    orderByName,
-    orderByPopulation,
-    filterByActivities,
-    filterByContinent
 } from '../../redux/actions';
 import style from './Home.module.css'
+
 
 const Home = () => {
     const dispatch = useDispatch();
     const countries = useSelector(state => state.countries);
     const activities = useSelector(state => state.activities);
+    
 
     useEffect(() => {
         if (!countries.length) {
@@ -23,6 +22,8 @@ const Home = () => {
         }
         dispatch(getAllActivities());
     }, [dispatch, countries.length]);
+
+    
 
 
 
@@ -72,22 +73,15 @@ const Home = () => {
                 return 0; // Si no se seleccionó ningún ordenamiento por nombre, no cambiar el orden de los países
             }
         });
-        
-
-
-
-
 
     const handleOrderByName = (e) => {
         e.preventDefault();
-        dispatch(orderByName(e.target.value));
         setCurrentPage(1);
         setFilters({ ...filters, orderBy: e.target.value });
     };
 
     const handleOrderByPopulation = (e) => {
         e.preventDefault();
-        dispatch(orderByPopulation(e.target.value));
         setCurrentPage(1);
         setFilters({ ...filters, orderByPop: e.target.value });
     };
@@ -97,7 +91,6 @@ const Home = () => {
     const handleFilterByActivities = (e) => {
         //setIsLoading(true);
         e.preventDefault();
-        dispatch(filterByActivities(e.target.value));
         setCurrentPage(1);
         setFilters({ ...filters, filter: e.target.value });
         //setIsLoading(false);
@@ -105,7 +98,7 @@ const Home = () => {
 
     const handleFilterByContinent = (e) => {
         e.preventDefault();
-        dispatch(filterByContinent(e.target.value));
+        dispatch(filterByContinent(e.target.value))
         setCurrentPage(1);
         setFilters({ ...filters, filterBy: e.target.value });
     };
@@ -196,11 +189,6 @@ const Home = () => {
                     nextHandler={nextHandler}
                     prevHandler={prevHandler} />
             </div>
-
-
-
-
-
         </div >
     )
 }

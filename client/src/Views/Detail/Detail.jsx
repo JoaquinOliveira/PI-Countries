@@ -1,4 +1,4 @@
-import { Clean, getCountriesById } from "../../redux/actions";
+import { Clean, /* deleteActivity */ getCountriesById } from "../../redux/actions";
 import React from 'react';
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,10 +9,11 @@ const Detail = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const myCountry = useSelector((state) => {
-        console.log("myCountry:", state.countriesDetail);
+        /*  console.log("myCountry:", state.countriesDetail); */
 
         return state.countriesDetail;
     });
+
     useEffect(() => {
         console.log(id)
         dispatch(getCountriesById(id));
@@ -22,9 +23,11 @@ const Detail = () => {
     }, [dispatch, id]);
 
 
-    console.log('mycountry:' + myCountry.id)
+
+
+    /* console.log('mycountry:' + myCountry.id)
     console.log('myCountry.length:' + myCountry.length)
-    console.log(Object.keys(myCountry).length > 0)
+    console.log(Object.keys(myCountry).length > 0) */
     return (
         <div className={style.container}>
             {Object.keys(myCountry).length > 0 ?
@@ -45,10 +48,15 @@ const Detail = () => {
                             <div className={style.info1}>
 
                                 {myCountry.activities.map(activity => (
-
-                                    <p key={activity.id}>
-                                        {activity.name}
-                                    </p>
+                                    <div className={style.infoImg}>
+                                        <p key={activity.id}>
+                                            {activity.name}
+                                          {/*    {<p> <img className={style.image} src={activity.image} alt={''} width="50px" heigth="50px"/></p>}  */}
+                                        </p>{/*
+                                        <button onClick={() => dispatch(deleteActivity(activity.id))} >
+                                        x
+                                        </button> */}
+                                    </div>
 
 
                                 ))}

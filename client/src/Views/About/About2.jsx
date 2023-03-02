@@ -1,6 +1,6 @@
 import React from "react";
-import styles from './About.module.css'
-export default function About() {
+import styles from './About2.module.css'
+export default function About2() {
     return (
         <div id='about' className={styles.container}>
             <div className={styles.front}>

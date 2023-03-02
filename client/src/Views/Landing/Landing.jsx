@@ -3,7 +3,6 @@ import style from './Landing.module.css';
 import { FaChevronDown } from 'react-icons/fa';
 import About from '../About/About'
 
-import Footer from '../Footer/Footer';
 
 const Landing = () => {
     function scrollToAbout() {
@@ -13,7 +12,7 @@ const Landing = () => {
         }
       }
     return (
-        <>
+    <>
             <section id="landing">
                 <div className={style.container}>
                     <Link to='home'>

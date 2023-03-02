@@ -3,12 +3,12 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* alineación vertical en la parte inferior */
-  align-items: center; /* alineación horizontal centrada */
+  align-items: center;
   background-image: url("../../Assets/continents-map-text-countries-wallpaper-preview.jpg");
-  background-size: cover;
+  background-size:contain;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: contain;
+  padding: 0;
 }
 
 .container:target{
@@ -16,7 +16,7 @@
 }
 
 .btn {
-  margin-top: 500px;
+  margin-top: 565px;;
   height: 30px;
   width: 70px;
   background-color: #1890ff;

@@ -125,7 +125,7 @@ const rootReducer = (state = initialState, action) => {
         case ADD_FAVORITES:
             return {
                 ...state,
-                countries: [...state.countries, action.payload]
+                myFavorites: [...state.myFavorites, action.payload]
             }
         case DELETE_FAVORITES:
             const filtered = state.myFavorites.filter(fav => fav.id !== action.payload)

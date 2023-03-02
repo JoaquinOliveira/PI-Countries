@@ -3,7 +3,7 @@ import imgJoaco from "../../Assets/WhatsApp Image 2023-02-23 at 11.58.54.jpeg";
 import s from './About.module.css';
 import { AiFillLinkedin, AiFillGithub, AiFillFacebook } from 'react-icons/ai';
 import { FaChevronUp } from 'react-icons/fa';
-import Footer from '../Footer/Footer';
+
 
 
 function About() {
@@ -37,13 +37,7 @@ console.log(scrollToLanding())
                         <a href="https://www.facebook.com/joliveira1987"> <AiFillFacebook className={s.linkedin} icon={AiFillFacebook} /> </a>
                     </div>
                 </div>
-        
-                
-            <Footer />
-           
             </section>
-            
-
         </>
     )
 }

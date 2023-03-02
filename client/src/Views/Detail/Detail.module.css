@@ -50,16 +50,10 @@
   grid-column: 3/4;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-left: 1rem
+  margin-left: 1rem;
   
 }
 
-.info2 {
-  grid-row: 4/4;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  
-}
 
 
 .tittle2 {
@@ -67,7 +61,10 @@
 
 }
 
-
+.title2 img {
+  width: 5%;
+  height: 5%
+}
 .btn {
   grid-row: 5/6;
   cursor: pointer;
@@ -104,8 +101,12 @@
     grid-row: 2/4;
     grid-column: 1/2;
     margin: 1rem 0;
+    width: 30%
   }
-
+  .image {
+   width: 75px;
+    height: 75px;
+  }
   .info2 {
     grid-row: 3/4;
     grid-column: 1/2;

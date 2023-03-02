@@ -34,7 +34,8 @@ const NavBar = () => {
             <nav className={style.navbar}>
                 <Link to='/home' onClick={(e) => handleLinkClick(e)} className={style.logo}> {<AiOutlineHome />} </Link>
                 <Link to='/activities' onClick={(e) => handleLinkClick(e)} className = {style.link}> Create Activity </Link>
-                <Link to='/about' onClick={(e) => handleLinkClick(e)} className = {style.link}> About </Link>
+                <Link to='/favorites' onClick={(e) => handleLinkClick(e)} className = {style.link}> Favorites </Link>
+                <Link to='/about2' onClick={(e) => handleLinkClick(e)} className = {style.link}> About me </Link>
                 <div className={style.search}>
                     <input
                         type='text'

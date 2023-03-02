@@ -1,9 +1,6 @@
 .container {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-gap: 20px;
-  box-shadow: 0 8px 32px 0 rgba(24, 144, 255, 0.06); 
-  margin: 0.5rem 0.7rem;
   border-radius: 0.3rem;
   width: 100%;
   height: 100vh;
@@ -17,8 +14,6 @@
 .results {
   grid-column: 2 / -1;
 }
-
-
 .filters {
   display: flex;
   flex-direction: column;
@@ -32,51 +27,19 @@
   border: none;
 }
 select {
-  appearance: none; /* Eliminar la apariencia nativa */
-  background-color: #fff; /* Color de fondo */
-  border: 1px solid #ddd; /* Borde */
-  padding: 8px 12px; /* Espacio interno */
-  font-size: 16px; /* Tamaño de fuente */
-  font-weight: 400; /* Grosor de fuente */
-  line-height: 1.5; /* Altura de línea */
-  border-radius: 4px; /* Bordes redondeados */
-  width: 100%; /* Ancho */
-  max-width: 300px; /* Ancho máximo */
-  cursor: pointer; /* Cursor */
+  border-radius: 0.2rem;
+  height: 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 30px
 }
 
-/* Estilo para las opciones del select */
-select option {
-  background-color: #fff; /* Color de fondo */
-  color: #333; /* Color de fuente */
-  font-size: 16px; /* Tamaño de fuente */
-  font-weight: 400; /* Grosor de fuente */
-  line-height: 1.5; /* Altura de línea */
-}
-
-/* Estilo para el icono desplegable del select */
-select::-ms-expand {
-  display: none; /* Ocultar en Internet Explorer */
-}
-
-select::after {
-  content: "\25BC"; /* Código del icono */
-  position: absolute; /* Posición */
-  top: 50%; /* Alineación vertical */
-  right: 12px; /* Alineación horizontal */
-  transform: translateY(-50%); /* Alinear verticalmente */
-  pointer-events: none; /* No capturar eventos */
-}
-
-/* Estilo para el hover del select */
-select:hover {
-  border-color: #999; /* Cambiar el color del borde al pasar el mouse */
-}
-
-/* Estilo para el focus del select */
-select:focus {
-  outline: none; /* Eliminar el contorno del focus */
-  
+option {
+  border-radius: 0.2rem;
+  height: 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 30px
 }
 .btn {
     padding: 0.5rem 1rem;
@@ -96,8 +59,9 @@ select:focus {
 
 
 .mainContent {
-  margin-left: 250px;
-  padding: 20px;
+  margin-top: -75px;
+  margin-left: 175px;
+  padding: 100px
 }
 
 
