@@ -53,13 +53,13 @@ const Home = () => {
         .sort((a, b) => {
             // Ordenar por población
             if (filters.orderByPop === 'asc') {
-                if (a.population < b.population) return -1;
-                if (a.population > b.population) return 1;
+                if (a.population < b.population) return 1;
+                if (a.population > b.population) return -1;
                 // Si tienen la misma población, comparar por nombre
                 return a.name.localeCompare(b.name);
             } else if (filters.orderByPop === 'des') {
-                if (a.population > b.population) return -1;
-                if (a.population < b.population) return 1;
+                if (a.population > b.population) return 1;
+                if (a.population < b.population) return -1;
                 // Si tienen la misma población, comparar por nombre
                 return a.name.localeCompare(b.name);
             }
@@ -149,13 +149,13 @@ const Home = () => {
             <div className={style.filters}>
                 <select name='Order by name' value={filters.orderBy} onChange={(e) => handleOrderByName(e)}>
                     <option value="All">Order by Name</option>
-                    <option value='asc'>Ascendente</option>
-                    <option value='des'>Descendente</option>
+                    <option value='asc'>A / Z</option>
+                    <option value='des'>Z / A</option>
                 </select>
                 <select name="Order by population" id='Order by population' value={filters.orderByPop} onChange={(e) => handleOrderByPopulation(e)}>
                     <option value="All">Order by Population</option>
-                    <option value='asc'>Ascendente</option>
-                    <option value='des'>Descendente</option>
+                    <option value='asc'>+ / -</option>
+                    <option value='des'>- / A</option>
                 </select>
 
 

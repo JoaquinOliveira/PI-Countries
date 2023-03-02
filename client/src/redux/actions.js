@@ -98,6 +98,7 @@ export function postActivity(payload) {
             return {
                 type: POST_ACTIVITIES,
                 payload: apiData,
+
             };
         } catch (error) {
             Swal.fire({
@@ -105,8 +106,8 @@ export function postActivity(payload) {
                 title: 'Oops...',
                 text: `Could not create Activity. Try Again!`,
                 footer: '<a href="">Why do I have this issue?</a>'
-              })
-           
+            })
+
         }
     };
 }
@@ -139,12 +140,12 @@ export function addFavorites(id) {
     }
 }
 
-export function deleteFavorites (id){
-        return {
-            type: DELETE_FAVORITES,
-            payload: id
-        }
+export function deleteFavorites(id) {
+    return {
+        type: DELETE_FAVORITES,
+        payload: id
     }
+}
 
 
 

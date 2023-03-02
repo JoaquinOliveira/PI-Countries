@@ -8,7 +8,7 @@ import { FcSearch } from 'react-icons/fc'
 import { AiOutlineHome } from 'react-icons/ai'
 
 
-const NavBar = () => {
+const NavBar = (props) => {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
 
@@ -36,6 +36,11 @@ const NavBar = () => {
                 <Link to='/activities' onClick={(e) => handleLinkClick(e)} className = {style.link}> Create Activity </Link>
                 <Link to='/favorites' onClick={(e) => handleLinkClick(e)} className = {style.link}> Favorites </Link>
                 <Link to='/about2' onClick={(e) => handleLinkClick(e)} className = {style.link}> About me </Link>
+      
+                {props.logOut? <Link to='/' onClick={props.logOut} className = {style.link}> Log out </Link>: null}
+                
+                
+                
                 <div className={style.search}>
                     <input
                         type='text'

@@ -50,15 +50,16 @@ const Detail = () => {
                                 {myCountry.activities.map(activity => (
                                     <div className={style.infoImg}>
                                         <p key={activity.id}>
-                                            {activity.name}
-                                          {/*    {<p> <img className={style.image} src={activity.image} alt={''} width="50px" heigth="50px"/></p>}  */}
+                                            <p>{activity.name}</p>
+                                            {/* <p>{activity.duration}</p> 
+                                           <p>{activity.season}</p>
+                                           <p>{activity.difficulty}</p> */}
+                                            {/* {<img className={style.image} src={activity.image} alt={''} width="50px" heigth="50px"/>}  */}
                                         </p>{/*
                                         <button onClick={() => dispatch(deleteActivity(activity.id))} >
                                         x
                                         </button> */}
                                     </div>
-
-
                                 ))}
                             </div>
                             : <p>No activities found</p>

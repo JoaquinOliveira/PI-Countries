@@ -18,6 +18,9 @@ const Landing = () => {
                     <Link to='home'>
                         <button className={style.btn}> Enter </button>
                     </Link>
+                    <Link to='login'>
+                        <button className={style.login}> Login</button>
+                    </Link>
                     <div>
 
                         <FaChevronDown onClick={(e) => scrollToAbout()} className={style.flecha} />

@@ -69,43 +69,43 @@ export default function Form() {
     /* const handleChangeFile = ((e) => {
         setFile(e.target.files[0])
     }) */
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (input.name && input.difficulty && input.season && input.countryId.length) {
             dispatch(postActivity(input));
             //axios.post("http://localhost:3001/activities", input)
             //     .then(res => alert(res.data))
             //     .catch(err => alert(err))
-            Swal.fire({
-                icon: 'sucess',
-                title: 'Well done!',
-                text: `You added a new Activity!`,
-                
-            })
- 
-            setInputData({
-                name: "",
-                difficulty: 0,
-                duration: 0,
-                season: "",
-                countryId: [],
-                image: ''
-            });
-            navigate('/home');
             dispatch(getAllCountries())
+            try {
+                await dispatch(getAllCountries()); // espera a que se complete getAllCountries
+                setInputData({
+                    name: "",
+                    difficulty: 0,
+                    duration: 0,
+                    season: "",
+                    countryId: [],
+                    image: ''
+                });
+                navigate('/home');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Well done!',
+                    text: `You added a new Activity!`,
+                })
+            } catch (error) {
+                console.log(error);
+            }
         } else {
             e.preventDefault()
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: `You must complete every field correctly!`,
-                
+
             })
         }
-    };
-
-
-
+    }
     const handleDelete = ((e, d) => {
         e.preventDefault();
         setInputData({
@@ -266,36 +266,3 @@ export default function Form() {
         </div>)
 }
 
-//falta ver el tema de subir una imagen del harddrive personal de cada uno, o link de foto//
-
-/* // PARA EL LOGIN //
-/*   <div className={styles.container}>
-<Link to='/home'><button className ={style.btn}>Volver</button></Link>
-           <form onSubmit={handleSubmit}>
-               <div>
-                   <label>Username: </label>
-                   <input
-                       className={errors.name && 'warning'}
-                       name='username'
-                       value={userData.username}
-                       type='text'
-                       onChange={handleInputChange}
-                   />
-                   <p className={styles.danger}>{errors.username ? errors.username : null}</p>
-
-               </div>
-
-               <div>
-                   <label>Password: </label>
-                   <input
-                       className={errors.name && 'warning'}
-                       name='password'
-                       value={userData.password}
-                       type='password'
-                       onChange={handleInputChange}
-                   />
-                   <p className={styles.danger}>{errors.password ? errors.password : null}</p>
-               </div>
-               <button type='submit'>Login</button>
-           </form>
-       </div> */
